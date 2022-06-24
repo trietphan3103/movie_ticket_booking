@@ -1,0 +1,2997 @@
+:root {
+    --bg-color: rgba(0, 0, 0, 0.85);
+    --grey-color: hsl(210, 4%, 81%);
+    --sub-grey-color: hsl(210, 4%, 92%);
+    --orange-color: hsl(16, 88%, 58%);
+    --orange-dark-color: hsl(16, 88%, 50%);
+    --text-grey-color: rgb(148, 148, 148);
+    --red-color: #F90716;
+    --blue-color: hsl(210, 100%, 48%);
+    --green-color: rgb(40, 167, 69);
+    --warning-color: rgb(238, 92, 34);
+    --in-progress-color: rgb(28, 214, 59);
+}
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+
+a {
+    text-decoration: none;
+    color: #67b0d1;
+}
+
+a:hover {
+    color: #8ec4dd;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+.multiline {
+    white-space: pre-line;
+}
+
+.btn_contain {
+    display: flex;
+    width: fit-content;
+    border: 3px solid var(--orange-color);
+    color: var(--orange-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s all ease;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn_contain > label {
+    display: block;
+    margin: auto 0;
+    transition: 0.3s all ease;
+}
+
+.add_btn {
+    transition: 0.3s all ease;
+    margin-left: 15px;
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.9rem;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.btn_contain:hover .add_btn {
+    animation: rotation 2s infinite linear;
+    color: white;
+}
+.btn_contain:hover {
+    background-color: var(--orange-color);
+    color: white;
+}
+
+.user-modify-btn{
+    background: transparent;
+    color: var(--blue-color) ;
+    border: 2px solid var(--blue-color) ;
+    font-weight: 500;
+}
+
+.user-modify-btn:hover{
+    background: var(--blue-color);
+    color: white ;
+    border: 2px solid var(--blue-color) ;
+}
+
+.user-delete-btn{
+    background-color: transparent;
+    color: var(--red-color);
+    border: 2px solid var(--red-color);
+    font-weight: 500;
+}
+
+.user-delete-btn:hover{
+    background: var(--red-color);
+    color: white ;
+    border: 2px solid var(--red-color) ;
+}
+
+.user-edit-btn{
+    background-color: transparent;
+    color: var(--in-progress-color);
+    border: 2px solid var(--in-progress-color) ;
+    font-weight: 500;
+}
+
+.user-edit-btn:hover{
+    background: var(--in-progress-color);
+    color: white ;
+    border: 2px solid var(--in-progress-color) ;
+}
+
+/*--------------------------------------------------------------
+# Poster slideshow
+--------------------------------------------------------------*/
+/* Tổng quát */
+
+.poster-slideshow.slideshow-container {
+    width: 100vw;
+    overflow: hidden;
+    height: 250px;
+    position: relative;
+}
+
+.poster-slideshow input {
+    display: none;
+}
+
+.poster-slideshow .slides {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    justify-content: center;
+    flex-wrap: nowrap;
+    transition: 1s ease-in-out;
+}
+
+.poster-slideshow .slides .slide {
+    width: 25%;
+}
+
+.poster-slideshow .slides .slide img {
+    width: 100vw;
+    height: auto;
+    object-fit: cover;
+}
+/* căn lại hình poster */
+
+@media(min-width:1200px) {
+    .poster-slideshow.slideshow-container {
+        height: 580px;
+    }
+}
+
+@media(min-width:992px) and (max-width: 1199px) {
+    .poster-slideshow.slideshow-container {
+        height: 500px;
+    }
+}
+
+@media(min-width:768px) and (max-width: 991px) {
+    .poster-slideshow.slideshow-container {
+        min-height: 410px;
+    }
+}
+
+@media(min-width:576px) and (max-width: 767px) {
+    .poster-slideshow.slideshow-container {
+        height: 350px;
+    }
+}
+
+@media (max-width: 575px) {
+    .poster-slideshow.slideshow-container {
+        height: 250px;
+    }
+    .poster-slideshow .slides .slide img {
+        height: 100%;
+    }
+}
+/* Next & previous buttons */
+
+.poster-slideshow .prev-btn,
+.poster-slideshow .next-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.poster-slideshow .next-btn {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.poster-slideshow .prev-btn:hover,
+.poster-slideshow .next-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--orange-color);
+}
+/* navigation manual */
+
+.poster-slideshow .navigation-manual {
+    position: absolute;
+    width: 100%;
+    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+}
+
+.poster-slideshow .navigation-manual .manual-btn {
+    border: 1px solid #fff;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.poster-slideshow .navigation-manual .manual-btn:hover {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+.poster-slideshow .navigation-manual .manual-btn:not(:last-child) {
+    margin-right: 20px;
+}
+/* check điều kiện của radio để điều hướng slide */
+
+#poster-radio1:checked~.slides {
+    margin-left: 0;
+}
+
+#poster-radio2:checked~.slides {
+    margin-left: -100%;
+}
+
+#poster-radio3:checked~.slides {
+    margin-left: -200%;
+}
+
+#poster-radio4:checked~.slides {
+    margin-left: -300%;
+}
+/* Khi radio được check thì có hiệu ứng cho label của nó */
+
+#poster-radio1:checked~.navigation-manual .manual-btn1 {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+#poster-radio2:checked~.navigation-manual .manual-btn2 {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+#poster-radio3:checked~.navigation-manual .manual-btn3 {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+#poster-radio4:checked~.navigation-manual .manual-btn4 {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+@media (max-width: 767px) {
+    .poster-slideshow .navigation-manual {
+        position: absolute;
+        width: 100%;
+        margin-top: -40px;
+        display: flex;
+        justify-content: center;
+    }
+}
+/*--------------------------------------------------------------
+# Tab movies
+--------------------------------------------------------------*/
+
+.tab-movies {
+    margin-top: 20px;
+}
+
+.tab-movies .nav-tab-movies {
+    list-style-type: none;
+    display: flex;
+    padding: 10px 0;
+    position: relative;
+}
+
+.tab-movies .nav-tab-movies::after {
+    content: "";
+    width: 50%;
+    background: var(--grey-color);
+    height: 1px;
+    position: absolute;
+    top: calc(100%);
+    left: 0;
+    transition: 2s;
+    z-index: -1;
+}
+
+.tab-movies .nav-tab-movies a {
+    text-decoration: none;
+    color: var(--text-grey-color);
+    font-size: large;
+    font-weight: 500;
+    margin-right: 30px;
+    position: relative;
+}
+
+@media (max-width: 575px) {
+    .tab-movies .nav-tab-movies a {
+        font-size: 16px;
+    }
+}
+
+.tab-movies .nav-tab-movies a.active {
+    color: #fff;
+}
+
+.tab-movies .nav-tab-movies a.active::after {
+    width: 100%;
+    display: block;
+}
+
+.tab-movies .nav-tab-movies a:hover {
+    color: #fff;
+}
+
+.tab-movies .nav-tab-movies a::after {
+    display: none;
+    content: "";
+    width: 2%;
+    background: var(--orange-color);
+    height: 2px;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+}
+
+.tab-movies .nav-tab-movies a:hover::after {
+    width: 100%;
+    display: block;
+}
+/* movie-card */
+
+.tab-movies .movie-item {
+    margin-bottom: 40px;
+}
+
+.tab-movies .movie-card {
+    position: relative;
+}
+
+.tab-movies .movie-card .img-box {
+    display: block;
+    width: 100%;
+    padding-top: calc(200%/3);
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+}
+
+.tab-movies .movie-card:hover .movie-card-overlay {
+    display: block;
+}
+
+.tab-movies .movie-card-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.tab-movies .movie-card-overlay a {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab-movies .movie-card-overlay .age-limit-label {
+    padding: 0 5px;
+    color: #fff;
+    background: var(--orange-color);
+    margin-bottom: 10px;
+}
+
+.tab-movies .movie-card-overlay .buy-btn {
+    border-radius: 0%;
+    color: #fff;
+    border-color: #fff;
+}
+
+.tab-movies .movie-card-overlay .buy-btn:hover {
+    color: #fff;
+    border-color: var(--orange-color);
+    background: var(--orange-color);
+}
+
+.tab-movies .movie-item .movie-tittle {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+@media(max-width:576px) {
+    .tab-movies .movie-item {
+        margin-bottom: 36px;
+    }
+    .tab-movies .movie-item .movie-tittle {
+        font-size: 14px;
+    }
+}
+
+.tab-movies .movie-tittle .en-tittle {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #fff;
+    text-transform: uppercase;
+}
+/*--------------------------------------------------------------
+# Tab coupon
+--------------------------------------------------------------*/
+
+.tab-coupons .nav-tab {
+    list-style-type: none;
+    display: flex;
+    padding: 10px 0;
+    margin-top: 4px;
+    position: relative;
+}
+
+.tab-coupons .nav-tab::after {
+    content: "";
+    width: 50%;
+    background: var(--grey-color);
+    height: 1px;
+    position: absolute;
+    top: calc(100%);
+    left: 0;
+    transition: 2s;
+    z-index: -1;
+}
+
+.tab-coupons .nav-tab a {
+    text-decoration: none;
+    color: var(--text-grey-color);
+    font-size: large;
+    font-weight: 500;
+    margin-right: 30px;
+    position: relative;
+}
+
+@media(max-width:576px) {
+    .nav-tab a {
+        font-size: 16px;
+    }
+}
+
+.tab-coupons .nav-tab a.active {
+    color: #fff;
+}
+
+.tab-coupons .nav-tab a.active {
+    color: #fff;
+}
+
+.tab-coupons .nav-tab a.active::after {
+    width: 100%;
+    display: block;
+}
+
+.tab-coupons .nav-tab a:hover {
+    color: #fff;
+}
+
+.tab-coupons .nav-tab a::after {
+    display: none;
+    content: "";
+    width: 2%;
+    background: var(--orange-color);
+    height: 2px;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    transition: 2s;
+}
+
+.tab-coupons .nav-tab a:hover::after {
+    width: 100%;
+    display: block;
+}
+/* coupon-card */
+
+.tab-coupons .coupon-item {
+    margin-bottom: 25px;
+}
+
+.tab-coupons .coupon-card {
+    position: relative;
+    width: 100%;
+}
+
+.tab-coupons .coupon-card .img-box {
+    display: block;
+    width: 100%;
+    padding-top: 150%;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+}
+
+.tab-coupons .coupon-card:hover .coupon-card-overlay {
+    display: block;
+}
+
+.tab-coupons .coupon-card-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.tab-coupons .coupon-card-overlay a {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab-coupons .coupon-card-overlay .buy-btn {
+    border-radius: 0%;
+    color: #fff;
+    border-color: #fff;
+}
+
+.tab-coupons .coupon-card-overlay .buy-btn:hover {
+    color: #fff;
+    border-color: var(--orange-color);
+    background: var(--orange-color);
+}
+
+.tab-coupons .coupon-item .coupon-tittle {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* introduce -text */
+.introduces-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+}
+
+@media (max-width: 576px) {
+    .tab-coupons .coupon-item .coupon-tittle {
+        font-size: 12px;
+    }
+    /* introduce -text */
+    
+    .tab-introduces .introduces-text p{
+        font-size: 16px;
+        font-weight: 400;
+        color: rgb(199, 196, 196);
+    }
+}
+
+/* *******************************************************
+********** view/Common/Header.php
+******************************************************* */
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+#header {
+    transition: all 0.5s;
+    z-index: 100;
+    transition: all 0.5s;
+    padding: 24px 0;
+    background: var(--bg-color);
+}
+
+#poster {
+    display: flex;
+    width: 100vw !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    position: relative;
+}
+
+#poster .poster-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#poster img {
+    display: block;
+    width: inherit;
+    max-width: 100vw;
+    height: auto;
+}
+
+#header.header-transparent {
+    background: transparent;
+}
+
+#header.header-scrolled {
+    background: var(--orange-color);
+    padding: 12px;
+}
+
+#header .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#header .logo h1 a,
+#header .logo h1 a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#header .logo img {
+    padding: 0;
+    margin: 0;
+    max-height: 40px;
+}
+
+@media (max-width: 768px) {
+    #header.header-scrolled {
+        padding: 15px 0;
+    }
+}
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/**
+* Desktop Navigation 
+*/
+
+.navbar {
+    padding: 0;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    margin-left: 10px;
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.navbar a i,
+.navbar a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.account {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.account .fas {
+    font-size: 25px;
+}
+
+.navbar .dropdown ul {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: calc(100% + 30px);
+    margin: 0;
+    padding: 10px 0;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transition: 0.3s;
+}
+
+.navbar .dropdown ul li {
+    min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-transform: none;
+    font-weight: 600;
+    color: var(--bg-color);
+}
+
+.navbar .dropdown ul a i {
+    font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+    color: var(--orange-color);
+}
+
+.navbar .dropdown:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+    top: 0;
+    left: calc(100% - 30px);
+    visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+    opacity: 1;
+    top: 0;
+    left: 100%;
+    visibility: visible;
+}
+
+.navbar .dropdown>a .dropdown-icon {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.navbar .dropdown>a .dropdown-icon-mobile {
+    display: none;
+}
+
+@media (max-width: 1366px) {
+    .navbar .dropdown .dropdown ul {
+        left: 90%;
+    }
+    .navbar .dropdown .dropdown:hover>ul {
+        left: 100%;
+    }
+}
+/**
+* Mobile Navigation 
+*/
+
+.fas.fa-bars.mobile-nav-toggle {
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    line-height: 0;
+    transition: 0.5s;
+}
+
+@media (max-width: 991px) {
+    .fas.fa-bars.mobile-nav-toggle {
+        display: block;
+    }
+    .navbar ul {
+        display: none;
+    }
+}
+
+.navbar-mobile {
+    position: fixed !important;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: var(--bg-color);
+    transition: 0.3s;
+}
+
+.navbar-mobile .mobile-nav-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    padding: 10px;
+}
+
+.mobile-nav-toggle.fa-times {
+    font-size: 20px;
+}
+
+.navbar-mobile ul {
+    display: block;
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    padding: 10px 0;
+    background-color: #fff;
+    overflow-y: auto;
+    transition: 0.3s;
+}
+
+.navbar-mobile a,
+.navbar-mobile a:focus {
+    padding: 10px 20px;
+    font-size: 15px;
+    color: var(--bg-color);
+}
+
+.navbar-mobile a:hover,
+.navbar-mobile .active,
+.navbar-mobile li:hover>a {
+    color: var(--orange-color);
+}
+
+.navbar-mobile .getstarted,
+.navbar-mobile .getstarted:focus {
+    margin: 15px;
+}
+
+.navbar-mobile .dropdown ul {
+    position: static;
+    display: none;
+    margin: 10px 20px;
+    padding: 10px 0;
+    z-index: 99;
+    opacity: 1;
+    visibility: visible;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+}
+
+.navbar-mobile .dropdown ul li {
+    min-width: 200px;
+}
+
+.navbar-mobile .dropdown ul a {
+    padding: 10px 20px;
+}
+
+.navbar-mobile .dropdown ul a i {
+    font-size: 12px;
+}
+
+.navbar-mobile .dropdown ul a:hover,
+.navbar-mobile .dropdown ul .active:hover,
+.navbar-mobile .dropdown ul li:hover>a {
+    color: var(--orange-color);
+}
+
+.navbar-mobile .dropdown>.dropdown-active {
+    display: block;
+}
+
+.navbar-mobile .dropdown .dropdown ul.dropdown-active {
+    visibility: visible;
+}
+
+.navbar.navbar-mobile .dropdown>a .dropdown-icon {
+    display: none;
+}
+
+.navbar.navbar-mobile .dropdown>a .dropdown-icon-mobile {
+    display: inline-block;
+    --bg-color: rgba(0, 0, 0, 0.85);
+    --grey-color: #a0a3a7;
+    --orange-color: hsl(16, 88%, 58%);
+}
+
+.navbar .dropdown ul.account-dropdown {
+    padding-bottom: 0;
+}
+
+.navbar .dropdown ul.account-dropdown .logout-btn {
+    background-color: rgb(221, 103, 103) !important;
+    color: white !important;
+}
+
+.navbar .dropdown ul.account-dropdown .logout-btn a {
+    color: white !important;
+}
+
+.navbar .dropdown ul.account-dropdown .logout-btn:hover {
+    background-color: rgb(216, 29, 29) !important;
+}
+
+.navbar .dropdown ul.account-dropdown .logout-btn a:hover {
+    background-color: transparent !important;
+    color: rgb(212, 203, 203) !important;
+}
+
+.navbar .login-btn {
+    display: flex;
+    justify-content: center;
+    background-color: var(--orange-color);
+    /* box-shadow: 0px 0px 10px rgba(127, 137, 161, 0.25); */
+    text-align: center;
+    padding: 5px 25px;
+    width: 100%;
+    margin-left: 0px !important;
+}
+
+.navbar .login-btn:hover {
+    background-color: hsl(16, 74%, 57%);
+    box-shadow: 0px 0px 10px rgba(127, 137, 161, 0.25);
+}
+/* *******************************************************
+********** index.php
+******************************************************* */
+
+body {
+    overflow-x: hidden !important;
+}
+/* *******************************************************
+********** Footer.php
+******************************************************* */
+
+#footer {
+    background-color: #000;
+}
+
+.footer-title {
+    color: var(--orange-color);
+    font-size: 28px;
+}
+
+.menu-list a {
+    color: var(--grey-color);
+}
+
+.footer-icon a {
+    font-size: 36px;
+    color: var(--grey-color);
+    text-decoration: none;
+}
+
+.menu-list a:hover,
+.footer-icon a:hover {
+    color: var(--orange-color);
+    opacity: 0.8;
+    text-decoration: none;
+}
+/* *******************************************************
+********** Login.php
+******************************************************* */
+
+.alert {
+    text-align: center !important;
+}
+
+#login {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+}
+
+.login-form {
+    max-width: 450px;
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.label-font {
+    font-size: 18px;
+}
+
+.login-input {
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 16px;
+}
+
+#login .login-form .login-btn {
+    width: 100%;
+    background-color: var(--orange-color) !important;
+    font-size: 18px;
+    font-weight: 600 !important;
+}
+
+.login-btn:hover {
+    background-color: var(--orange-color);
+    opacity: 0.8;
+}
+
+.account {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.forget-password>a {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.account>a {
+    color: var(--orange-color);
+}
+
+.account>a:hover {
+    color: var(--orange-color);
+    opacity: 0.8;
+}
+
+.forget-password>a:hover {
+    color: #fff;
+}
+
+#message_signup,
+#message_signin,
+#message_update_user_infor,
+#message_update_user_danger,
+#message_session_danger,
+#message_session_info,
+#message_ticket_danger{
+    display: none;
+    text-align: center;
+    transition: 0.5s;
+}
+/* 
+*******************************************************
+********** view/Users/UserDetail.php
+******************************************************* 
+*/
+
+.user-details-contain.row {
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.user-details-contain .tab {
+    display: block;
+    width: 100%;
+    border-bottom: 0px;
+    padding-left: 10px;
+    font-size: var(--grey-color);
+    font-size: 25px;
+    text-align: center;
+    color: #a0a3a7;
+    cursor: pointer;
+    transition: 0.5s;
+    border-bottom: 3px solid var(--sub-grey-color);
+    padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .user-details-contain.row .tab {
+        min-width: fit-content !important;
+    }
+    .user-details-contain.row .tab.active {
+        display: block;
+    }
+    .user-details-contain .tab {
+        margin-top: 20px;
+    }
+}
+
+.user-details-contain .tab:hover {
+    color: var(--orange-color);
+}
+
+.user-details-contain .tab.active {
+    border-bottom: 3px solid var(--orange-color);
+    color: var(--orange-color);
+    transition: 0.5s;
+}
+
+.tab-content-contain {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 100%;
+}
+
+.tab-content-contain .tab-content {
+    display: none;
+    transition: 1s;
+}
+
+.tab-content-contain .tab-content-active {
+    display: block !important;
+}
+
+.tab-content-contain .row .item {
+    margin-bottom: 16px;
+}
+
+.tab-content-contain .row .item>label {
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    color: var(--orange-color);
+}
+
+.tab-content-contain .row .item>input,
+.tab-content-contain .row .item>select {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--orange-color);
+    line-height: inherit !important;
+}
+
+.tab-content-contain .row .item>input[type="submit"] {
+    margin-top: 10px;
+    background-color: var(--orange-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+    outline: none !important;
+    border: none !important;
+}
+
+.tab-content-contain .row .item>input[type="submit"]:hover,
+.tab-content-contain .row .item>input[type="submit"]:focus {
+    background-color: hsl(16, 88%, 50%);
+}
+
+#user-detail-form {
+    margin-top: 20px;
+}
+
+.container.container-custom {
+    min-width: 80vw;
+}
+
+.fl-left {
+    float: left;
+}
+
+.fl-right {
+    float: right;
+}
+
+.user-detail-page h1 {
+    text-transform: uppercase;
+    font-weight: 900;
+    border-left: 10px solid #fec500;
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+
+.row {
+    overflow: hidden;
+}
+
+.ticket {
+    background-color: white !important;
+}
+
+.card {
+    display: table-row !important;
+    background-color: #fff;
+    color: #989898;
+    margin-bottom: 10px;
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative;
+}
+
+.date {
+    display: table-cell;
+    width: 25%;
+    position: relative;
+    text-align: center;
+    border-right: 2px dashed #dadde6;
+}
+
+.date:before,
+.date:after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: var(--sub-grey-color);
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.date:after {
+    top: auto;
+    bottom: -15px;
+}
+
+.date time {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.date time span {
+    display: block;
+}
+
+.date time .time-main {
+    color: var(--orange-color);
+    font-weight: 600;
+    font-size: 250%;
+}
+
+.date time span {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.card-cont {
+    display: table-cell;
+    width: 75%;
+    font-size: 85%;
+    padding: 10px 10px 30px 50px;
+}
+
+.card-cont h3 {
+    font-size: 180%;
+    font-weight: 500;
+    color: var(--orange-color);
+    cursor: pointer;
+}
+
+.card-cont .fa,
+.card-cont .fas {
+    padding-right: 10px !important;
+}
+
+.card-cont>div {
+    display: table-row;
+}
+
+.card-cont .even-date i,
+.card-cont .even-info i,
+.card-cont .even-date time,
+.card-cont .even-info p {
+    display: table-cell;
+}
+
+.card-cont .even-date i,
+.card-cont .even-info i {
+    padding: 5% 5% 0 0;
+}
+
+.card-cont .even-info p {
+    padding: 30px 50px 0 0;
+}
+
+.card-cont .even-date time span {
+    display: block;
+}
+
+.card-cont a {
+    display: block;
+    text-decoration: none;
+    width: 80px;
+    height: 30px;
+    background-color: #d8dde0;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 2px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.row:last-child .card:first-child .card-cont a {
+    background-color: #037fdd;
+}
+
+.row:last-child .card:last-child .card-cont a {
+    background-color: #f8504c;
+}
+
+@media screen and (max-width: 860px) {
+    .card {
+        display: block;
+        float: none;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .card+.card {
+        margin-left: 0;
+    }
+    .card-cont .even-date,
+    .card-cont .even-info {
+        font-size: 75%;
+    }
+}
+
+.poster-title.user-detail-title {
+    color: white;
+    font-size: 300%;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+}
+
+.ticket-box {
+    display: block;
+    margin-top: 40px;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    padding: 20px;
+    background-color: var(--sub-grey-color);
+}
+
+.ticket-box>.col {
+    margin-bottom: 10px;
+}
+/* *******************************************************
+********** view/Phim/PhimDetail.php
+******************************************************* */
+
+#phim-wrapper {
+    padding-top: 50px;
+}
+
+#phim-wrapper .breadcrumb {
+    background-color: transparent !important;
+    font-size: 14px;
+    margin-top: 54px;
+}
+
+#phim-wrapper .breadcrumb>li>a,
+.phim-details-info .info-row>label {
+    color: var(--grey-color);
+}
+
+#phim-wrapper .breadcrumb>li>a:hover {
+    color: var(--orange-color);
+}
+
+#phim-wrapper .breadcrumb>li+li::after {
+    padding: 0 5px;
+    color: var(--grey-color);
+    font-weight: 400;
+    line-height: 1;
+}
+
+li.breadcrumb-item.active {
+    font-weight: 500;
+}
+
+.phim-details-container .phim-details-title {
+    font-size: 28px;
+}
+
+.phim-details-poster img,
+#phim-sidebar .phim-item img {
+    max-width: 100%;
+}
+
+.phim-details-poster .dat-ve-btn {
+    margin-top: 12px;
+    background-color: var(--orange-color);
+    color: #fff;
+    font-weight: 500;
+    min-width: 90px;
+    transition: all 0.2s ease-out;
+}
+
+.phim-details-poster .dat-ve-btn:hover {
+    opacity: 0.8;
+    color: #fff;
+}
+
+.phim-details-rating {
+    font-size: 18px;
+}
+
+.phim-details-rating>.fas {
+    color: #fec500;
+}
+
+.phim-details-info .info-row {
+    margin-bottom: 10px;
+    line-height: 24px;
+}
+
+.phim-details-content-text {
+    color: var(--grey-color);
+    font-size: 15px;
+}
+
+@media (max-width: 769px) {
+    #phim-wrapper .breadcrumb {
+        margin-top: 24px;
+    }
+}
+
+#phim-sidebar .phim-item {
+    margin-bottom: 24px;
+}
+
+#phim-sidebar .poster-phim {
+    transition: all 400ms ease;
+}
+
+#phim-sidebar .poster-phim:hover {
+    opacity: 0.5;
+}
+
+#phim-sidebar .phim-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-top: 8px;
+    text-transform: uppercase;
+    font-size: 17px;
+    overflow: hidden;
+}
+/* *******************************************************
+********** view/Ve/CreateVe.php
+******************************************************* */
+
+#create-ve-wrapper {
+    padding-top: 50px;
+    color: #fff;
+}
+
+#create-ve-wrapper .breadcrumb {
+    background-color: transparent !important;
+    font-size: 14px;
+    margin-top: 54px;
+}
+
+#lich-management-wrapper .breadcrumb > li > a,
+#create-ve-wrapper .breadcrumb > li > a,
+.phim-details-info .info-row>label {
+    color: var(--grey-color);
+}
+
+#lich-management-wrapper .breadcrumb>li>a:hover,
+#create-ve-wrapper .breadcrumb>li>a:hover,
+.lich-content-text .lich-calender-icon:hover {
+    color: var(--orange-color);
+}
+
+#lich-management-wrapper .breadcrumb>li+li::after,
+#create-ve-wrapper .breadcrumb>li+li::after {
+    padding: 0 5px;
+    color: var(--grey-color);
+    font-weight: 400;
+    line-height: 1;
+}
+
+#create-ve-wrapper li.breadcrumb-item.active {
+    font-weight: 500;
+}
+/*--------------------------------------------------------------
+# View form đặt vé phim
+--------------------------------------------------------------*/
+/* Common */
+
+#booking-ve {
+    margin-bottom: 36px;
+}
+
+.booking-lich-chieu,
+.booking-ghe,
+.confirm-ve {
+    margin-bottom: 24px;
+}
+
+.booking-lich-chieu-title,
+.booking-ghe-title,
+.confirm-ve-title {
+    background-color: var(--orange-color);
+    color: #fff;
+    padding: 8px 16px;
+    margin: 0;
+    font-size: 24px;
+}
+
+.booking-lich-chieu-container,
+.booking-ghe-container,
+.confirm-ve-container {
+    border: 4px solid var(--orange-color);
+    margin-bottom: 16px;
+    padding: 16px 20px;
+}
+
+#create-ve-wrapper .button-wrapper .back-btn {
+    background-color: inherit;
+    color: #fff;
+    border: 1px solid var(--orange-color);
+    font-weight: 500;
+    margin-right: 20px;
+    border-radius: 5px;
+    transition: all 0.2s ease-out;
+}
+
+#create-ve-wrapper .button-wrapper .create-ve-next__btn,
+#create-ve-wrapper .button-wrapper .create-ve-confirm__btn {
+    background-color: var(--orange-color);
+    color: #fff;
+    font-weight: 500;
+    margin-right: 20px;
+    border-radius: 5px;
+    transition: all 0.2s ease-out;
+}
+
+#create-ve-wrapper .button-wrapper .back-btn:hover {
+    opacity: 0.8;
+}
+
+#create-ve-wrapper .button-wrapper .create-ve-next__btn:hover,
+#create-ve-wrapper .button-wrapper .create-ve-confirm__btn:hover {
+    color: #fff;
+    opacity: 0.8;
+}
+/* Chọn lịch chiếu */
+
+.booking-lich-chieu .lich-label {
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+.booking-lich-chieu .pick-lich,
+.booking-lich-chieu .pick-ghe {
+    display: inline-block;
+}
+.pick-lich #select-lich,
+.pick-ghe #select-ghe {
+    width: 260px;
+    height: 100%;
+    min-width: 100%;
+}
+
+.pick-lich .date-btn-input {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+    width: 250px;
+    min-width: 100%;
+    height: 100%;
+    color: #000;
+}
+
+.booking-lich-chieu .lich-chieu {
+    border: 1px solid #a0a3a7;
+    border-radius: 3px;
+    width: 100%;
+    margin: 32px 0;
+    padding: 24px 0 8px 36px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lich-chieu .lich-chieu-item {
+    background-color: #fff;
+    border: 1px solid var(--grey-color);
+    border-radius: 5px;
+    padding: 7px 12px;
+    margin-right: 16px;
+    margin-bottom: 12px;
+    min-width: 85px;
+    font-size: 18px;
+    color: var(--bg-color);
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+}
+
+.lich-chieu .lich-chieu-item:hover {
+    color: var(--orange-color);
+    border: 1px solid var(--orange-color);
+}
+
+@media (max-width: 768px) {
+    #create-ve-wrapper .breadcrumb {
+        margin-top: 24px;
+    }
+    .booking-lich-chieu-title,
+    .booking-ghe-title,
+    .confirm-ve-title {
+        font-size: 20px;
+    }
+    .booking-lich-chieu .lich-label {
+        font-size: 17px;
+    }
+    #create-ve-form .lich-chieu {
+        padding: 18px 0 0px 28px;
+    }
+    .lich-chieu .lich-chieu-item {
+        padding: 8px 16px;
+        margin-bottom: 16px;
+        width: 30%;
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .booking-lich-chieu .pick-lich,
+    .booking-lich-chieu .pick-ghe {
+        height: 48px;
+    }
+    .lich-chieu .lich-chieu-item {
+        width: 16%;
+    }
+}
+
+@media (max-width: 576px) {
+    .booking-lich-chieu .pick-lich,
+    .booking-lich-chieu .pick-ghe {
+        width: 100%;
+        height: 48px;
+    }
+    .booking-lich-chieu .lich-chieu .lich-chieu-item {
+        width: 42%;
+    }
+    #create-ve-wrapper .button-wrapper .back-btn {
+        margin-bottom: 12px;
+    }
+    #create-ve-wrapper .button-wrapper .back-btn,
+    #create-ve-wrapper .button-wrapper .create-ve-next__btn,
+    #create-ve-wrapper .button-wrapper .create-ve-confirm__btn {
+        display: block;
+        width: 100%;
+        height: 48px;
+    }
+}
+/*--------------------------------------------------------------
+# View xác nhận thông tin vé và thanh toán
+--------------------------------------------------------------*/
+/* Thông tin vé đã đặt */
+
+.confirm-ve-detail .ve-detail-content {
+    padding: 15px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    border: 1px solid #5d5a5a;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.confirm-ve-detail .ve-detail-content img {
+    width: 210px;
+    height: 100%;
+}
+
+.ve-detail-right {
+    color: var(--grey-color);
+}
+
+.confirm-ve-detail .ve-detail-content .phim-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-top: 8px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.ve-detail-date,
+.ve-detail-time,
+.ve-detail-phong,
+.ve-detail-seat {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+}
+/* Chọn coupon và payment */
+
+.ve-detail-coupon {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ve-detail-coupon .ve-coupon-wrapper {
+    border-left: 4px solid rgb(224, 224, 224);
+}
+
+.ve-detail-coupon .ve-coupon-wrapper:focus-within {
+    border-color: var(--orange-color);
+}
+
+.ve-detail-coupon .ve-coupon-title {
+    display: inline-block;
+    margin-right: 16px;
+    padding-left: 12px;
+    font-weight: 500;
+}
+
+.ve-coupon-content {
+    display: inline-block;
+}
+
+.ve-coupon-content .ve-coupon-input {
+    height: 36px;
+    background-color: inherit;
+    padding-left: 4px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 4px;
+    outline: none;
+    color: #fff;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.ve-coupon-content .ve-coupon-input:hover,
+.ve-coupon-content .ve-coupon-input:focus {
+    height: 44px;
+    padding: 6px;
+}
+
+.ve-detail-coupon .ve-payment-title {
+    font-weight: 500;
+}
+
+.ve-detail-coupon .ve-payment {
+    margin-top: 12px;
+    display: flex;
+}
+
+.ve-payment-item {
+    display: flex;
+    -webkit-box-align: center;
+}
+
+.ve-payment-item .icon-wrapper {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 11px;
+    margin-right: 32px;
+    cursor: pointer;
+}
+
+.ve-payment-item .icon-wrapper img {
+    width: 100%;
+}
+
+.line-dash {
+    border-bottom: 1px dashed #e5e5e541;
+    margin: 24px 0;
+}
+
+.price-ticket {
+    -webkit-box-flex: 1;
+    flex: 1;
+    margin-right: 24px;
+}
+
+@media (max-width: 576px) {
+    .confirm-ve-detail .ve-detail-content img {
+        width: 100%;
+    }
+    .ve-coupon-content {
+        display: block;
+    }
+    .ve-coupon-content .ve-coupon-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+/* Giá vé */
+
+.confirm-ve-detail .ve-price-info {
+    display: flex;
+}
+
+.ve-price-info .ve-column {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-right: 24px;
+}
+
+.ve-price-info .label {
+    color: var(--grey-color);
+}
+
+.ve-price-info .ve-price {
+    margin-bottom: 16px;
+}
+
+.ve-price-info .ve-price,
+.ve-price-info .final-price {
+    display: block;
+    text-align: right;
+}
+
+.ve-price-info .value {
+    color: #fff;
+}
+
+.ve-price-info .value.final-price {
+    color: var(--orange-color);
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-left: 8px;
+    line-height: 22px;
+}
+
+.ve-price-info .ve-price .value-unit {
+    font-size: 12px;
+}
+
+.ve-price-info .final-price .value-unit {
+    font-size: 16px;
+}
+/*--------------------------------------------------------------
+# Modal thông báo lỗi và thông báo đặt vé thành công
+--------------------------------------------------------------*/
+
+#veErrorLabel,
+#veSuccessLabel {
+    color: var(--orange-color);
+}
+
+#veError .ve-error__btn,
+#veSuccess .ve-success__btn {
+    background-color: var(--orange-color);
+    border: 1px solid var(--orange-color);
+    color: #fff;
+    width: 120px;
+    transition: all 0.2s ease-out;
+}
+
+#veError .ve-error__btn:hover,
+#veSuccess .ve-success__btn:hover {
+    opacity: 0.8;
+}
+
+.ve-modal__container .ve-modal__text {
+    font-weight: 500;
+    padding-bottom: 12px;
+}
+
+.ve-modal__container .ve-modal__poster {
+    text-align: center;
+}
+
+.ve-modal__container .ve-modal__poster img {
+    width: 100%;
+}
+
+.ve-modal__content {
+    margin-top: 8px;
+}
+
+.ve-modal__content .ve-modal__title {
+    text-transform: uppercase;
+}
+
+.ve-modal__content .ve-modal__info {
+    line-height: 2;
+}
+
+@media (max-width: 576px) {
+    .ve-detail-coupon .ve-coupon-wrapper {
+        border: none;
+        margin-bottom: 32px;
+    }
+    .ve-detail-coupon .ve-coupon-title {
+        padding: 0;
+    }
+    .ve-modal__content .ve-modal__info {
+        font-size: 18px;
+    }
+}
+/* *******************************************************
+********** view/Phim/PhimManagement.php
+*******************************************************  */
+
+#message_create_phim {
+    display: none;
+}
+
+#message_update_phim {
+    display: none;
+}
+/* *******************************************************
+********** view/Phim/PhimDetail.php
+******************************************************* */
+
+#phim-wrapper .breadcrumb {
+    background-color: transparent !important;
+    font-size: 14px;
+    margin-top: 54px;
+}
+
+#phim-wrapper .breadcrumb>li>a:hover,
+.lich-content-text .lich-calender-icon:hover {
+    color: var(--orange-color);
+}
+
+#phim-wrapper .breadcrumb>li+li::after {
+    padding: 0 5px;
+    color: var(--grey-color);
+    font-weight: 400;
+    line-height: 1;
+}
+
+li.breadcrumb-item.active {
+    font-weight: 500;
+}
+
+.phim-details-container .phim-details-title {
+    font-size: 28px;
+}
+
+.phim-details-poster img,
+#phim-sidebar .phim-item img {
+    max-width: 100%;
+}
+
+.phim-details-poster .dat-ve-btn {
+    margin-top: 12px;
+    background-color: var(--orange-color);
+    color: #fff;
+    font-weight: 500;
+    min-width: 90px;
+    transition: all 0.2s ease-out;
+}
+
+.rating-btn {
+    background-color: var(--orange-color);
+    color: #fff;
+    font-size: 14px;
+}
+
+.rating-btn:hover {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.phim-details-info .info-row {
+    margin-bottom: 10px;
+    line-height: 24px;
+}
+
+.phim-details-content-text {
+    color: var(--grey-color);
+    font-size: 15px;
+}
+
+@media (max-width: 769px) {
+    #phim-wrapper .breadcrumb {
+        margin-top: 24px;
+    }
+}
+
+#phim-sidebar .phim-item {
+    margin-bottom: 24px;
+}
+
+#phim-sidebar .poster-phim {
+    transition: all 400ms ease;
+}
+
+#phim-sidebar .poster-phim:hover {
+    opacity: 0.5;
+}
+
+#phim-sidebar .phim-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-top: 8px;
+    text-transform: uppercase;
+    font-size: 17px;
+    overflow: hidden;
+}
+/* *******************************************************
+********** view/Ve/CreateVe.php
+******************************************************* */
+
+#lich-management-wrapper li.breadcrumb-item.active {
+    font-weight: 500;
+}
+
+#lich-management-wrapper .table thead th {
+    vertical-align: middle;
+}
+
+.add-lich-chieu__btn {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: end;
+}
+
+#delLichModalLabel {
+    color: var(--orange-color) !important;
+}
+
+.btn.lich-chieu-btn {
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+    color: #fff;
+}
+
+.btn.lich-chieu-btn:hover {
+    color: #fff;
+    background-color: hsl(16, 74%, 57%);
+    border-color: hsl(16, 74%, 57%);
+}
+
+#lich-manage-detail .lich-manage-detail__title,
+#lich-detail-edit .lich-manage-detail__title {
+    text-transform: uppercase;
+    display: inline;
+}
+
+#lich-manage-detail .lich-manage-detail__info {
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+#lich-manage-detail .lich-manage-detail__info i {
+    margin-right: 8px;
+}
+
+#lich-manage-detail .lich-manage-detail__items {
+    width: 100%;
+    margin: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 15px;
+}
+
+#lich-manage-detail .lich-manage-detail__time {
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #808488;
+    border-radius: 5px;
+    padding: 7px 12px;
+    min-width: 95px;
+    font-size: 18px;
+}
+
+#lich-manage-detail .lich-manage-time__input button,
+#lich-detail-edit .lich-full-btn button {
+    width: 100%;
+}
+
+#lich-manage-detail .lich-manage-time__input .fas {
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+#updateLichModal .lich-manage-detail__time,
+#addLichModal .lich-manage-detail__time {
+    position: relative;
+}
+
+#updateLichModal .time-items__delete,
+#addLichModal .time-items__delete {
+    position: absolute;
+    top: -12px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+#updateLichModal .time-items__delete a,
+#addLichModal .time-items__delete a {
+    color: var(--bg-color);
+    transition: color .15s ease-in-out;
+}
+
+#updateLichModal .time-items__delete a:hover,
+#addLichModal .time-items__delete a:hover {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 567px) {
+    #lich-manage-detail .lich-manage-time__input button,
+    #lich-detail-edit .lich-full-btn,
+    #edit-time__btn {
+        margin-top: 12px;
+    }
+    #lich-manage-detail .lich-manage-detail__items {
+        justify-content: flex-start;
+        gap: 18px;
+    }
+    #lich-manage-detail .lich-manage-detail__time {
+        min-width: 46%;
+    }
+    #lich-manage-detail .lich-manage-detail__select {
+        display: block;
+    }
+}
+
+@media (min-width: 576px) {
+    #updateLichModal .modal-dialog,
+    #addLichModal .modal-dialog {
+        max-width: 600px !important;
+        margin: 5.5rem auto !important;
+    }
+}
+  
+#create-ve-wrapper li.breadcrumb-item.active {
+    font-weight: 500;
+}
+/*--------------------------------------------------------------
+# View form đặt vé phim
+--------------------------------------------------------------*/
+/* Common */
+
+#booking-ve {
+    margin-bottom: 36px;
+}
+
+.booking-lich-chieu,
+.booking-ghe,
+.confirm-ve {
+    margin-bottom: 24px;
+}
+
+.booking-lich-chieu-title,
+.booking-ghe-title,
+.confirm-ve-title {
+    background-color: var(--orange-color);
+    color: #fff;
+    padding: 8px 16px;
+    margin: 0;
+    font-size: 24px;
+}
+
+.booking-lich-chieu-container,
+.booking-ghe-container,
+.confirm-ve-container {
+    border: 4px solid var(--orange-color);
+    margin-bottom: 16px;
+    padding: 16px 20px;
+}
+
+#create-ve-wrapper .button-wrapper .back-btn {
+    background-color: inherit;
+    color: #fff;
+    border: 1px solid var(--orange-color);
+    font-weight: 500;
+    margin-right: 20px;
+    border-radius: 5px;
+    transition: all 0.2s ease-out;
+}
+
+#create-ve-wrapper .button-wrapper .create-ve-next__btn,
+#create-ve-wrapper .button-wrapper .create-ve-confirm__btn {
+    background-color: var(--orange-color);
+    color: #fff;
+    font-weight: 500;
+    margin-right: 20px;
+    border-radius: 5px;
+    transition: all 0.2s ease-out;
+}
+
+#create-ve-wrapper .button-wrapper .back-btn:hover {
+    opacity: 0.8;
+}
+
+#create-ve-wrapper .button-wrapper .create-ve-next__btn:hover,
+#create-ve-wrapper .button-wrapper .create-ve-confirm__btn:hover {
+    color: #fff;
+    opacity: 0.8;
+}
+/* Chọn lịch chiếu */
+
+.booking-lich-chieu .lich-label {
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+.booking-lich-chieu .pick-lich,
+.booking-lich-chieu .pick-ghe {
+    display: inline-block;
+}
+
+.pick-ghe #select-ghe {
+    width: 260px;
+    height: 100%;
+    min-width: 100%;
+}
+
+.pick-lich .date-btn-input {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+    width: 250px;
+    min-width: 100%;
+    height: 100%;
+    color: #000;
+}
+
+.booking-lich-chieu .lich-chieu {
+    border: 1px solid #a0a3a7;
+    border-radius: 3px;
+    width: 100%;
+    margin: 32px 0;
+    padding: 24px 0 8px 36px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lich-chieu .lich-chieu-item {
+    background-color: #fff;
+    border: 1px solid var(--grey-color);
+    border-radius: 5px;
+    padding: 7px 12px;
+    margin-right: 16px;
+    margin-bottom: 12px;
+    min-width: 85px;
+    font-size: 18px;
+    color: var(--bg-color);
+    cursor: pointer;
+    transition: none;
+}
+
+.lich-chieu .lich-chieu-item:hover {
+    color: var(--orange-color);
+    border: 1px solid var(--orange-color);
+}
+
+@media (max-width: 768px) {
+    #create-ve-wrapper .breadcrumb {
+        margin-top: 24px;
+    }
+    .booking-lich-chieu-title,
+    .booking-ghe-title,
+    .confirm-ve-title {
+        font-size: 20px;
+    }
+    .booking-lich-chieu .lich-label {
+        font-size: 17px;
+    }
+    #create-ve-form .lich-chieu {
+        padding: 18px 0 0px 28px;
+    }
+    .lich-chieu .lich-chieu-item {
+        padding: 8px 16px;
+        margin-bottom: 16px;
+        width: 30%;
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .booking-lich-chieu .pick-lich,
+    .booking-lich-chieu .pick-ghe {
+        height: 48px;
+    }
+    .lich-chieu .lich-chieu-item {
+        width: 16%;
+    }
+}
+
+@media (max-width: 576px) {
+    .booking-lich-chieu .pick-lich,
+    .booking-lich-chieu .pick-ghe {
+        width: 100%;
+        height: 48px;
+    }
+    .booking-lich-chieu .lich-chieu .lich-chieu-item {
+        width: 42%;
+    }
+    #create-ve-wrapper .button-wrapper .back-btn {
+        margin-bottom: 12px;
+    }
+    #create-ve-wrapper .button-wrapper .back-btn,
+    #create-ve-wrapper .button-wrapper .create-ve-next__btn,
+    #create-ve-wrapper .button-wrapper .create-ve-confirm__btn {
+        display: block;
+        width: 100%;
+        height: 48px;
+    }
+}
+/*--------------------------------------------------------------
+# View xác nhận thông tin vé và thanh toán
+--------------------------------------------------------------*/
+/* Thông tin vé đã đặt */
+.confirm-ve{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: black;
+    display: none;
+}
+
+.confirm-ve-detail .ve-detail-content {
+    padding: 15px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    border: 1px solid #5d5a5a;
+    border-radius: 4px;
+    align-items: center;
+    display: block;
+}
+
+.confirm-ve-detail .ve-detail-content img {
+    width: 210px;
+    height: 100%;
+}
+
+.ve-detail-right {
+    color: var(--grey-color);
+}
+
+.confirm-ve-detail .ve-detail-content .phim-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-top: 8px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.ve-detail-date,
+.ve-detail-time,
+.ve-detail-phong,
+.ve-detail-seat {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+}
+/* Chọn coupon và payment */
+
+.ve-detail-coupon {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ve-detail-coupon .ve-coupon-wrapper {
+    border-left: 4px solid rgb(224, 224, 224);
+}
+
+.ve-detail-coupon .ve-coupon-wrapper:focus-within {
+    border-color: var(--orange-color);
+}
+
+.ve-detail-coupon .ve-coupon-title {
+    display: inline-block;
+    margin-right: 16px;
+    padding-left: 12px;
+    font-weight: 500;
+}
+
+.ve-coupon-content {
+    display: inline-block;
+}
+
+.ve-coupon-content .ve-coupon-input {
+    height: 36px;
+    background-color: inherit;
+    padding-left: 4px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 4px;
+    outline: none;
+    color: #fff;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.ve-coupon-content .ve-coupon-input:hover,
+.ve-coupon-content .ve-coupon-input:focus {
+    height: 44px;
+    padding: 6px;
+}
+
+.ve-detail-coupon .ve-payment-title {
+    font-weight: 500;
+}
+
+.ve-detail-coupon .ve-payment {
+    margin-top: 12px;
+    display: flex;
+}
+
+.ve-payment-item {
+    display: flex;
+    -webkit-box-align: center;
+}
+
+.ve-payment-item .icon-wrapper {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 11px;
+    margin-right: 32px;
+    cursor: pointer;
+}
+
+.ve-payment-item .icon-wrapper img {
+    width: 100%;
+}
+
+#create-ve-wrapper .line-dash {
+    border-bottom: 1px dashed #e5e5e541;
+    margin: 24px 0;
+}
+
+.price-ticket {
+    -webkit-box-flex: 1;
+    flex: 1;
+    margin-right: 24px;
+}
+
+@media (max-width: 576px) {
+    .confirm-ve-detail .ve-detail-content img {
+        width: 100%;
+    }
+    .ve-coupon-content {
+        display: block;
+    }
+    .ve-coupon-content .ve-coupon-input {
+        width: 100%;
+    }
+}
+/* Giá vé */
+
+.confirm-ve-detail .ve-price-info {
+    display: flex;
+}
+
+.ve-price-info .ve-column {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-right: 24px;
+}
+
+.ve-price-info .label {
+    color: var(--grey-color);
+}
+
+.ve-price-info .ve-price {
+    margin-bottom: 16px;
+}
+
+.ve-price-info .ve-price,
+.ve-price-info .final-price {
+    display: block;
+    text-align: right;
+}
+
+.ve-price-info .value {
+    color: #fff;
+}
+
+.ve-price-info .value.final-price {
+    color: var(--orange-color);
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-left: 8px;
+    line-height: 22px;
+}
+
+.ve-price-info .ve-price .value-unit {
+    font-size: 12px;
+}
+
+.ve-price-info .final-price .value-unit {
+    font-size: 16px;
+}
+/*--------------------------------------------------------------
+# Modal thông báo lỗi và thông báo đặt vé thành công
+--------------------------------------------------------------*/
+
+#veErrorLabel,
+#veSuccessLabel {
+    color: var(--orange-color);
+}
+
+#veError .ve-error__btn,
+#veSuccess .ve-success__btn {
+    background-color: var(--orange-color);
+    border: 1px solid var(--orange-color);
+    color: #fff;
+    width: 120px;
+    transition: all 0.2s ease-out;
+}
+
+#veError .ve-error__btn:hover,
+#veSuccess .ve-success__btn:hover {
+    opacity: 0.8;
+}
+
+.ve-modal__container .ve-modal__text {
+    font-weight: 500;
+    padding-bottom: 12px;
+}
+
+.ve-modal__container .ve-modal__poster {
+    text-align: center;
+}
+
+.ve-modal__container .ve-modal__poster img {
+    width: 100%;
+}
+
+.ve-modal__content {
+    margin-top: 8px;
+}
+
+.ve-modal__content .ve-modal__title {
+    text-transform: uppercase;
+}
+
+.ve-modal__content .ve-modal__info {
+    line-height: 2;
+}
+
+@media (max-width: 576px) {
+    .ve-detail-coupon .ve-coupon-wrapper {
+        border: none;
+        margin-bottom: 32px;
+    }
+
+    .ve-detail-coupon .ve-coupon-title {
+        padding: 0;
+    }
+
+    .ve-modal__content .ve-modal__info {
+        font-size: 18px;
+    }
+}
+
+/* *******************************************************
+********** view/Phim/PhimManagement.php
+*******************************************************  */
+    
+#message_create_phim {
+    display: none;
+}
+
+#message_update_phim {
+    display: none;
+}
+
+.add_btn {
+    transition: 0.3s all ease;
+    margin-left: 15px;
+    color: var(--orange-color);
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.9rem;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+/* Common */
+#lich-management-wrapper {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #fff;
+    min-height: 100vw;
+}
+
+#lich-management-wrapper .breadcrumb {
+    background-color: transparent !important;
+    font-size: 14px;
+    margin-top: 54px;
+}
+
+#lich-management-wrapper .breadcrumb > li > a,
+.phim-details-info .info-row > label {
+    color: var(--grey-color);
+}
+
+#lich-management-wrapper .breadcrumb > li > a:hover,
+.lich-content-text .lich-calender-icon:hover {
+    color: var(--orange-color);
+}
+
+#lich-management-wrapper .breadcrumb > li + li::after {
+    padding: 0 5px;
+    color: var(--grey-color);
+    font-weight: 400;
+    line-height: 1;
+}
+
+#lich-management-wrapper li.breadcrumb-item.active {
+    font-weight: 500;
+}
+
+#lich-management-wrapper .table thead th {
+    vertical-align: middle;
+}
+
+#lich-manage-detail .lich-manage-detail__creator {
+    font-weight: 500;
+}
+
+#edit-time__btn {
+    margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+    .lich-table .lich-actions button {
+        width: 58px;
+        margin-top: 4px;
+    }
+}
+
+@media (max-width: 567px) {
+    #lich-management-wrapper .lich-table {
+        overflow-x: scroll;
+    }
+}
+
+@media (min-width: 576px) {
+    #editLichModal .modal-dialog,
+    #addLichModal .modal-dialog {
+        max-width: 600px !important;
+        margin: 5.5rem auto !important;
+    }
+}
+
+/* LichChieuDetail */
+.lich-detail-table {
+    display: flex;
+    overflow: hidden;
+    margin-top: 24px;
+    background-color: #343a40;
+}
+
+.lich-detail-table .lich-detail-column {
+    padding: 0;
+}
+
+.lich-detail-table .lich-detail-column__border {
+    padding: 0;
+    border: 1px solid #454d55;
+}
+
+.lich-detail-table .lich-detail-table__header {
+    padding: 8px 12px;
+    color: #495057;
+    background-color: #e9ecef;
+    font-weight: 700;
+}
+
+.lich-detail-table .table-cell,
+.lich-detail-table .table-cell__item {
+    width: 100%;
+    min-height: 45px;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.lich-detail-table .table-cell__item {
+    position: relative;
+}
+
+.lich-detail-table .table-cell__item:not(:last-child) {
+    border-bottom: 1px solid #454d55;
+}
+
+.lich-detail-table__wrapper:nth-of-type(odd) {
+    background-color: rgba(255,255,255,.05);
+}
+
+.lich-detail-table__wrapper:hover {
+    background-color: rgba(255,255,255,.075);
+}
+
+.lich-detail-actions {
+    flex-wrap: wrap;
+}
+
+#lich-detail-edit__btn,
+#lich-detail-delete__btn {
+    height: 37px;
+    width: 90px;
+}
+
+#lich-detail-delete__btn {
+    margin-top: 8px;
+}
+
+.lich-edit-time__wrapper {
+    padding: 8px 100px;
+}
+
+.lich-edit-time__item::after {
+    border-bottom: 1px dashed #333;
+}
+
+@media (max-width: 768px) {
+    .lich-detail-table .lich-detail-table__header {
+        height: 60px;
+    }
+
+    #lich-detail-edit__btn,
+    #lich-detail-delete__btn {
+        height: 48px;
+        width: 70px;
+    }
+}
+
+@media (max-width: 567px) { 
+    #lich-detail-edit__btn,
+    #lich-detail-delete__btn {
+        height: 48px;
+        width: 50px;
+    }
+}
+
+/* *******************************************************
+********** view/UtilsView/error404.html
+******************************************************* */
+#error404 .st0{font-family:'FootlightMTLight';}
+#error404 .st1{font-size:83.0285px;}
+#error404 .st2{fill:gray;}
+
+#error404 svg {
+  width: 500px;
+    height: 400px;
+    text-align: center;
+    fill: var(--orange-color);
+}
+
+#error404 path#XMLID_5_ {
+    fill: var(--orange-color);
+    filter: url(#blurFilter4);
+}
+
+#error404 path#XMLID_11_ ,
+path#XMLID_2_ {
+    fill: var(--orange-color);
+}
+
+#error404 .circle {
+  animation: out 2s infinite ease-out;
+  fill: var(--orange-color);
+}
+
+#error404 {
+  text-align:center;
+}
+
+#error404 .message{
+	color:var(--orange-color);
+}
+
+#error404 .message:after{
+    content:"]";
+}
+
+#error404 .message:before{
+	content:"[";
+}
+
+#error404 .message:after, .message:before {
+    color: var(--orange-color);
+    font-size: 20px;
+    -webkit-animation-name: opacity;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: opacity;
+            animation-name: opacity;
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            margin:0 50px;
+}
+
+@-webkit-keyframes opacity {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes opacity {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes out {
+    0% {r:1;  opacity: 0.9 ;}
+    25%{r:5;  opacity: 0.3 ;}
+    50%{r:10; opacity: 0.2 ;}
+    75%{r:15;opacity:0.1;}
+ 	100% {r:20;opacity:0;}
+}
+
+/* *******************************************************
+********** view/utilsView/Error403.php
+******************************************************* */
+
+#error403 {
+    background-color: var(--bg-color);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+#error403 .error {
+	margin-bottom: 16px;
+	font-size: 32px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 8px;
+	color: #C94D4D;
+	position: relative;
+}
+
+#error403 .error-num {
+	position: relative;
+	font-size: 10rem;
+	font-family: 'Oswald';
+	letter-spacing: -0.01em;
+	color: white;
+	animation: colorSplit 1.25s steps(2, end) infinite;
+}
+
+@keyframes colorSplit {
+    25% { 
+        text-shadow: -0.02em 0 0 #ED008C, 0.025em 0 0 #0087EF; 
+    }
+
+    75% { 
+        text-shadow: -0.035em 0 0 #ED008C, 0.04em 0 0 #0087EF; 
+    }
+}
+
+#error403 .title {
+	margin: 30px 0 20px;
+	font-weight: 600;
+}
+
+#error403 .desc {
+	color: var(--grey-color);
+}
+
+#error403 .back-btn {
+    margin-top: 30px;
+    padding: 8px 16px;
+}
+
+/* *******************************************************
+********** view/PhongChieu/PhongChieuManagement.php
+******************************************************* */
+#message_create_phong,
+#message_update_phong,
+#message_delete_phong,
+#delPhongChieuModalConfirm {
+    display: none;
+}
+
+/* *******************************************************
+********** view/LichChieu/LichChieuManagement.php
+******************************************************* */
+.film-name-session{
+    font-weight: 500;
+}
+
+.filter > .custom-select{
+    width: auto;
+    margin-bottom: 10px;
+}
+
+/* *******************************************************
+********** view/Ve/VeCreate.php
+******************************************************* */
+.time-selected{
+    border: 2px solid var(--orange-color) !important;
+    color: var(--orange-color) !important;
+    font-weight: 500 !important;
+}
+
+
+/* *******************************************************
+********** view/Ghe/GheManagement.php
+******************************************************* */
+#message_create_ghe,
+#message_delete_ghe {
+    display: none;
+}
